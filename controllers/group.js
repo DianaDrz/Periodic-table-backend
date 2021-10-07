@@ -6,10 +6,10 @@ exports.createGroup = async(req,res)=>{
     try {
        //todo lo que queramos enviar a nuestra  
        const { body } = req;
-       if(!body.description) return res.status(404).send({message :'Descripcion es requerida'});
+       if(!body.numberGroup) return res.status(404).send({message :'Numero de grupo es requerido'});
 
        const create = await group.create({
-           description: body.description,
+           numberGroup: body.numberGroup,
        });
        return res.status(201).send({message:"Grupo creado correctamente"});
     } catch (error) {
@@ -36,7 +36,7 @@ exports.updateGroup = async(req, res) =>{
 
         if (!body)
           return res.status(400).send({message: "Los datos son requeridos"});
-        if(!body.description) return res.status(404).send({message :'Descripcion es requerido'});
+        if(!body.numberGroup) return res.status(404).send({message :'Numero de grupo es requerido'});
                 
         const validate = await group.findOne({
             where: { id: params.id, statusDelete:false},
@@ -45,12 +45,12 @@ exports.updateGroup = async(req, res) =>{
         if (!validate) 
           return res.status(404).send({message: "No se encontro el grupo"});
 
-        validate.description = body.description;
+        validate.numberGroup = body.numberGroup;
         validate.save();
 
         return res
             .status(200)
-            .send({message:"Grupo actualliizado correctamente"});
+            .send({message:"Grupo actualizado correctamente"});
     } catch (error) {
         return res.status(500).send(error.message);
     }

@@ -14,10 +14,22 @@ enrutador
     .route('/element')
     .get(element.getElement)
     .post(element.createElement);
+  
 enrutador
     .route('/element/:id')
     .put(element.updateElement)
     .delete(element.deleteElement);
+
+//Rutas para ordenar de diferente manera
+enrutador
+    .route('/orderCategory')
+    .get(element.orderElementsCategory);
+enrutador
+    .route('/orderGroups')
+    .get(element.orderElementsGroups);
+enrutador
+    .route('/orderPeriod')
+    .get(element.orderElementsPeriod);
 
 //rutas para Users
 enrutador

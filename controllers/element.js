@@ -1,9 +1,11 @@
 const db = require('../models/index');
-//const Sequelize = require("sequelize");
-//const Op = Sequelize.Op;
+const Sequelize = require("sequelize");
+const Op = Sequelize.Op;
 const uploadImages = require("../utils/uploadImages");
 const element = db.element;
+const category = db.category;
 //crear
+//1.- Alta de todo lo necesario
 exports.createElement = async(req,res)=>{
     try {
        //todo lo que queramos enviar a nuestra  
@@ -35,17 +37,43 @@ exports.createElement = async(req,res)=>{
 };
 //listar
 exports.getElement = async (req, res) =>{
-    try {
+    try {        
+        //Busquedas por nombre de categorias
+        const {nameCategory}= req.query;
+        if(nameCategory)
+        {
+            const find = await element.findAll({
+                where:{statusDelete: false},
+                include:{
+                    model:category,
+                    where:{name:{[Op.iRegexp]:nameCategory}}
+                },
+            });
+            return res.status(200).send(find);
+        }
+        //3.- Traer la información de 1 o N elementos
+        const {page,size}=req.query;
+        if(page,size){
+            const elem = await element.findAndCountAll({
+                limit:size,
+                offset:page*size
+            });
+            return res.status(200).send(elem);
+        }
+        // 2.- Traer la información de la tabla
         const find = await element.findAll({
             where:{statusDelete: false},
+            //order:['id_period', 'atomicNumber']
+
         });
+        //order = [[atomicNumber, 'DESC']]
         return res.status(200).send(find);
     } catch (error) {
         return res.status(500).send(error.message);
         
     }
 };
-//editar
+// 4. Editar
 exports.updateElement = async(req, res) =>{
     try {
         const {body, params}=req;
@@ -80,15 +108,15 @@ exports.updateElement = async(req, res) =>{
         return res.status(500).send(error.message);
     }
 };
-//eliminar
+//5. Eliminar
 exports.deleteElement = async (req, res) =>{
     try {
         const { id } = req.params;
         const find = await element.findByPk(id);
         if (!find) 
-          return res.status(404).send({message: "no se encontro el elemento"});
+          return res.status(404).send({message: "No se encontro el elemento"});
         if (find.statusDelete===true) 
-          return res.status(404).send({message: "no se encontro el elemento"});
+          return res.status(404).send({message: "No se encontro el elemento"});
         
         find.statusDelete = true;
         find.save();
@@ -101,10 +129,39 @@ exports.deleteElement = async (req, res) =>{
     }
 
 };
-exports.getBusqueda = async (req, res) =>{
-    try {
+
+exports.orderElementsCategory = async (req, res) =>{
+    try {        
         const find = await element.findAll({
             where:{statusDelete: false},
+            include:{
+                model:category, 
+                order:['name','atomicNumber']
+            },
+        });
+        return res.status(200).send(find);
+    } catch (error) {
+        return res.status(500).send(error.message);
+        
+    }
+};
+exports.orderElementsGroups = async (req, res) =>{
+    try {        
+        const find = await element.findAll({
+            where:{statusDelete: false},
+            order:['id_group', 'atomicNumber']            
+        });
+        return res.status(200).send(find);
+    } catch (error) {
+        return res.status(500).send(error.message);
+        
+    }
+};
+exports.orderElementsPeriod = async (req, res) =>{
+    try {        
+        const find = await element.findAll({
+            where:{statusDelete: false},
+            order:['id_period', 'atomicNumber']            
         });
         return res.status(200).send(find);
     } catch (error) {

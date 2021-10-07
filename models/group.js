@@ -1,6 +1,6 @@
 module.exports = (sequelize,Sequelize) =>{
     const Group = sequelize.define('group',{
-        description:{
+        numberGroup:{
             type: Sequelize.STRING,
         },
         statusDelete:{
