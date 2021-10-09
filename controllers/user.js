@@ -48,7 +48,9 @@ exports.updateUser = async(req, res) =>{
         if(!body.email) return res.status(404).send({message :'email es requerido'});
         if(!body.password) return res.status(404).send({message :'password es requerido'});
                 
-        
+        let encriptedPassword = bcrypt.hashSync(body.password,10);
+        console.log('La contraseña \n',encriptedPassword);
+
         const validate = await user.findOne({
             where: { id: params.id, statusDelete:false},
         });
@@ -58,7 +60,7 @@ exports.updateUser = async(req, res) =>{
 
         validate.name = body.name;
         validate.email = body.email;
-        validate.password = body.password;
+        validate.password = encriptedPassword;
         validate.save();
 
         return res

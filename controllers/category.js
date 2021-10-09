@@ -1,15 +1,15 @@
 const db = require('../models/index');
 const category = db.category;
-
+const element = db.element;
 //crear
 exports.createCategory = async(req,res)=>{
     try {
        //todo lo que queramos enviar a nuestra  
        const { body } = req;
-       if(!body.name) return res.status(404).send({message :'Nombre es requerido'});
+       if(!body.nameC) return res.status(404).send({message :'Nombre es requerido'});
 
        const create = await category.create({
-           name: body.name,
+           nameC: body.nameC,
        });
        return res.status(201).send({message:"Categoria creada correctamente"});
     } catch (error) {
@@ -36,7 +36,7 @@ exports.updateCategory = async(req, res) =>{
 
         if (!body)
           return res.status(400).send({message: "Los datos son requeridos"});
-        if(!body.name) return res.status(404).send({message :'name es requerido'});
+        if(!body.nameC) return res.status(404).send({message :'name es requerido'});
                 
         const validate = await category.findOne({
             where: { id: params.id, statusDelete:false},
@@ -45,7 +45,7 @@ exports.updateCategory = async(req, res) =>{
         if (!validate) 
           return res.status(404).send({message: "No se encontro la categoria"});
 
-        validate.name = body.name;
+        validate.nameC = body.nameC;
         validate.save();
 
         return res
@@ -73,5 +73,19 @@ exports.deleteCategory = async (req, res) =>{
 
     } catch (error) {
         return res.status(500).send(error.message);
+    }
+};
+exports.orderElementsCategory = async (req, res) =>{
+    try {        
+        const find = await category.findAll({
+            where:{statusDelete: false},
+            include:{
+                model:element,            
+            },
+            order:['nameC']
+        });
+        return res.status(200).send(find);
+    } catch (error) {
+        return res.status(500).send(error.message);       
     }
 };

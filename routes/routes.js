@@ -13,16 +13,16 @@ const {verifyToken} = require('../middelware/authorization');
 enrutador
     .route('/element')
     .get(element.getElement)
-    .post(element.createElement);
+    .post(verifyToken,element.createElement);
   
 enrutador
     .route('/element/:id')
-    .put(element.updateElement)
-    .delete(element.deleteElement);
+    .put(verifyToken,element.updateElement)
+    .delete(verifyToken,element.deleteElement);
 
 //Rutas para ordenar de diferente manera
 enrutador
-    .route('/orderCategory')
+    .route('/orderCategory1')
     .get(element.orderElementsCategory);
 enrutador
     .route('/orderGroups')
@@ -30,6 +30,9 @@ enrutador
 enrutador
     .route('/orderPeriod')
     .get(element.orderElementsPeriod);
+enrutador
+    .route('/orderCategory')
+    .get(category.orderElementsCategory);
 
 //rutas para Users
 enrutador
@@ -39,37 +42,37 @@ enrutador
 enrutador
     .route('/user/:id')
     .put(user.updateUser)
-    .delete(user.deleteUser);
+    .delete(verifyToken,user.deleteUser);
 
 //rutas para Category
 enrutador
     .route('/category')
     .get(category.getCategory)
-    .post(category.createCategory);
+    .post(verifyToken,category.createCategory);
 enrutador
     .route('/category/:id')
-    .put(category.updateCategory)
-    .delete(category.deleteCategory);
+    .put(verifyToken,category.updateCategory)
+    .delete(verifyToken,category.deleteCategory);
 
 //rutas para Group
 enrutador
     .route('/group')
     .get(group.getGroup)
-    .post(group.createGroup);
+    .post(verifyToken,group.createGroup);
 enrutador
     .route('/group/:id')
-    .put(group.updateGroup)
-    .delete(group.deleteGroup);
+    .put(verifyToken,group.updateGroup)
+    .delete(verifyToken,group.deleteGroup);
 
 //rutas para Period
 enrutador
     .route('/period')
     .get(period.getPeriod)
-    .post(period.createPeriod);
+    .post(verifyToken,period.createPeriod);
 enrutador
     .route('/period/:id')
-    .put(period.updatePeriod)
-    .delete(period.deletePeriod);
+    .put(verifyToken,period.updatePeriod)
+    .delete(verifyToken,period.deletePeriod);
 
 //rutas para genralities
 enrutador

@@ -1,6 +1,6 @@
 module.exports = (sequelize,Sequelize) =>{
     const Category = sequelize.define('category',{
-        name:{
+        nameC:{
             type: Sequelize.STRING,
         },
         statusDelete:{

@@ -10,7 +10,7 @@ let items = [
     symbolQ:'H',
     atomicNumber:1,
     atomicMass:'1,0',
-    image:'',
+    image:'/image/1633736282749.jpeg',
     id_category:3,
     id_group:1,
     id_period:1
@@ -21,7 +21,7 @@ let items = [
     symbolQ:'Li',
     atomicNumber:3,
     atomicMass:'6,9',
-    image:'',
+    image:'/image/1633736350279.jpeg',
     id_category:7,
     id_group:1,
     id_period:2

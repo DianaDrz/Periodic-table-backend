@@ -5,34 +5,34 @@ const { setTimestampsSeeder } = require('../utils/util');
 // Datos de producción
 let items = [
   {
-    name: 'Gases nobles'
+    nameC: 'Gases nobles'
   },  
   {
-    name: 'Hálogenos'
+    nameC: 'Hálogenos'
   },
   {
-    name: 'No metales'
+    nameC: 'No metales'
   },
   {
-    name: 'Metaloides'
+    nameC: 'Metaloides'
   },
   {
-    name: 'Metales de transición'
+    nameC: 'Metales de transición'
   },
   {
-    name: 'Alcalinotérreos'
+    nameC: 'Alcalinotérreos'
   },
   {
-    name: 'Metales Alcalinos'
+    nameC: 'Metales Alcalinos'
   },
   {
-    name: 'Lantanidos'
+    nameC: 'Lantanidos'
   },
   {
-    name: 'Actinidos'
+    nameC: 'Actinidos'
   },
   {
-    name: 'Otros metales'
+    nameC: 'Otros metales'
   },
 ];
 

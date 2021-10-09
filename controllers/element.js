@@ -10,11 +10,11 @@ exports.createElement = async(req,res)=>{
     try {
        //todo lo que queramos enviar a nuestra  
        const { body } = req;
-       if(!body.typeElement) return res.status(404).send({message :'typeElement es requerido'});
-       if(!body.name) return res.status(404).send({message :'name es requerido'});
-       if(!body.symbolQ) return res.status(404).send({message :'symbolQ es requerido'});
-       if(!body.atomicNumber) return res.status(404).send({message :'atomicNumber es requerido'});
-       if(!body.atomicMass) return res.status(404).send({message :'atomicMass es requerido'});
+       if(!body.typeElement) return res.status(404).send({message :'Tipo de elemento es requerido'});
+       if(!body.name) return res.status(404).send({message :'Nombre es requerido'});
+       if(!body.symbolQ) return res.status(404).send({message :'Simbolo es requerido'});
+       if(!body.atomicNumber) return res.status(404).send({message :'Numero atomico es requerido'});
+       if(!body.atomicMass) return res.status(404).send({message :'Masa atomica es requerido'});
        
        let image = await uploadImages.fileupload(body.image,'/image');
 
@@ -90,7 +90,7 @@ exports.updateElement = async(req, res) =>{
         const validate = await element.findOne({
             where: { id: params.id, statusDelete:false},
         });
-
+        let image = await uploadImages.fileupload(body.image,'/image');
         if (!validate) 
           return res.status(404).send({message: "no se encontro el Elemento"});
 
@@ -99,6 +99,10 @@ exports.updateElement = async(req, res) =>{
         validate.symbolQ = body.symbolQ;
         validate.atomicNumber = body.atomicNumber;
         validate.atomicMass = body.atomicMass;
+        validate.image = image;
+        validate.id_category = body.id_category;
+        validate.id_group = body.id_group;
+        validate.id_period = body.id_period;
         validate.save();
 
         return res
@@ -134,10 +138,9 @@ exports.orderElementsCategory = async (req, res) =>{
     try {        
         const find = await element.findAll({
             where:{statusDelete: false},
-            include:{
-                model:category, 
-                order:['name','atomicNumber']
-            },
+            include: [ { model: category } ],
+            order: [ [ { model: category }, 'nameC' ],'atomicNumber' ]
+
         });
         return res.status(200).send(find);
     } catch (error) {

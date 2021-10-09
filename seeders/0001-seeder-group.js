@@ -5,58 +5,58 @@ const { setTimestampsSeeder } = require('../utils/util');
 // Datos de producción
 let items = [
   {
-    numberGroup: '1'
+    description: 'Grupo 1'
   },
   {
-    numberGroup: '2'
+    description: 'Grupo 2'
   },
   {
-    numberGroup: '3'
+    description: 'Grupo 3'
   }, 
   {
-    numberGroup: '4'
+    description: 'Grupo 4'
   },
   {
-    numberGroup: '5'
+    description: 'Grupo 5'
   },
   {
-    numberGroup: '6'
+    description: 'Grupo 6'
   },
   {
-    numberGroup: '7'
+    description: 'Grupo 7'
   },
   {
-    numberGroup: '8'
+    description: 'Grupo 8'
   },
   {
-    numberGroup: '9'
+    description: 'Grupo 9'
   },
   {
-    numberGroup: '10'
+    description: 'Grupo 10'
   },
   {
-    numberGroup: '11'
+    description: 'Grupo 11'
   },
   {
-    numberGroup: '12'
+    description: 'Grupo 12'
   },
   {
-    numberGroup: '13'
+    description: 'Grupo 13'
   },
   {
-    numberGroup: '14'
+    description: 'Grupo 14'
   },
   {
-    numberGroup: '15'
+    description: 'Grupo 15'
   },
   {
-    numberGroup: '16'
+    description: 'Grupo 16'
   },
   {
-    numberGroup: '17'
+    description: 'Grupo 17'
   },
   {
-    numberGroup: '18'
+    description: 'Grupo 18'
   },
 ];
 
