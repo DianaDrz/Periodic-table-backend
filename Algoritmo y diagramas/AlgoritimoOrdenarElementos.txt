@@ -1,0 +1,87 @@
+PSEUDOCÓDIGO
+*Algoritmo para ordenar de diferentes formas los elementos
+*******************************************************************
+Begin
+	input n
+	Element [] elements <= new Element[n];
+	for i <= 0 to n 
+		input t,n,s,nro,m,i,c,g,p
+		elements[i] = new Element(t,n,s,nro,m,i,c,g,p)
+	endFor
+	
+	input number,param
+
+	Element.orderElements(elements,number,param)
+End
+*******************************************************************
+class Element
+	//Atributos
+	string typeElement
+	string name
+	string simbolQ
+	int atomicNumber
+	int atomicMass
+	int category
+	int group
+	int period 
+
+	//Constructores
+	
+	Element(t,n,s,nro,m,c,g,p){
+		typeElement <= t
+		name <= n
+		simbolQ <= s
+		atomicNumber <= nro
+		atomicMass <= m
+		category <= c
+		group <= g
+		period  <= p
+	}
+	Element(){}
+	
+	//Metodos
+
+	void order(Element [] elements){
+		Element p1 <= new Element();
+		for i <= 0 to n
+		   for j <=i+1 to n
+		   		if (elements[i].atomicNumber<elements[j].atomicNumber)
+		   			p1<=elements[i]
+		   			elements[i]<=elements[j]
+		   			elements[j]<=p1
+		   		endif
+		   	endfor
+		endfor
+	}
+
+	//ordenar elementos de diferentes formas por category, group y period segun su atomicNumber
+
+	void orderElments(Element [] elements,number,param){
+		Elemento [] aux <= new Elemento[n];
+		case number of
+			1:
+				for i <= 0 to n
+					if(elements[i].category=param)
+						elements[i]=aux[i];
+				endfor
+				aux.order()
+			break
+			2:
+				for i <= 0 to n
+					if(elements[i].group=param)
+						elements[i]=aux[i];
+				endfor
+				aux.order()			
+			break
+			3:
+				for i <= 0 to n
+					if(elements[i].period=param)
+						elements[i]=aux[i];
+				endfor
+				aux.order()			
+			break
+			default : invalid value
+		endcase
+	}
+endclass
+*******************************************************************
