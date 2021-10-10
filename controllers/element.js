@@ -133,7 +133,8 @@ exports.deleteElement = async (req, res) =>{
     }
 
 };
-
+//6.- Traer los elementos ordenados por diferentes formas
+//Ordenando elementos segun su Categoria y el numero atomico 
 exports.orderElementsCategory = async (req, res) =>{
     try {        
         const find = await element.findAll({
@@ -148,6 +149,7 @@ exports.orderElementsCategory = async (req, res) =>{
         
     }
 };
+//Ordenando elementos segun su Grupo y el numero atomico 
 exports.orderElementsGroups = async (req, res) =>{
     try {        
         const find = await element.findAll({
@@ -160,6 +162,7 @@ exports.orderElementsGroups = async (req, res) =>{
         
     }
 };
+//Ordenando elementos segun su Periodo y el numero atomico 
 exports.orderElementsPeriod = async (req, res) =>{
     try {        
         const find = await element.findAll({

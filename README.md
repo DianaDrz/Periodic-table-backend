@@ -1,5 +1,5 @@
 # Periodic-table-backend
-Proyecto periodic table backend  usando node.js, express y sequelize.
+Proyecto periodic table backend  usando node.js,postgreSQL, express y sequelize.
 
 Este proyecto contiene los siguientes módulos:
 
@@ -16,7 +16,7 @@ También se integra los módulos con sus respectivos seeders.
 Requisitos
 
   - Nodejs 10.13.0 en adelante
-  - Postgresql 9 en adelante
+  - PostgreSQL 9 en adelante
 
 
 ## Instalación del proyecto
